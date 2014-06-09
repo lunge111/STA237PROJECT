@@ -29,4 +29,28 @@ RS_test(data,data_dep=T)
 RS_test(data,q=0)
 *******
 
+reg_sim()is to run simulations of  
+usage:
+Arguments:  
+model: wether a LMSV model or ARSV model  
+ph,d,sig2: coefficients in ARFIMA(p,d,q) model  
+replicate: number of replication    
+samplesize: sample size of each realization  
+reg_sim(model="ARSV",ph=0.9,d=0.49,sig2=0.5)  
+reg_sim(model="LMSV",ph=0,d=0.47,sig2=0.5)
+********
+
+arfima.est():　estimate ARFIMA coefficients with setteled sigma's  
+arfima.est.sig():  estimate ARFIMA coefficients and sigma's  
+arfima.est.mc():  estimate ARFIMA coefficients and sigma's  using MCMC method  
+Arguments:  
+order: order of ARFIMA coefficients  
+dat: data to be estimated  
+FFT: wether use fast fourier transform  
+startpoint:  startpoints of optim or MCMC  
+sig1,sig2(in arfima.est): prespecified sigma_eta and sigma_epsilon  
+max.iter(in arfima.est.mc): max iteration 
+
+
+
 
