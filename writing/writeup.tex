@@ -33,7 +33,7 @@
 
 \section{Background introduction}
 
-We know that capital markets always show characters of non-linearity,and long-term memory is the most important feature of non-linear systems.In fact, many economists believe that asset market is a non-linear system with many uncertainties. Many researches have shown that the conditional volatility of asset prices show long memory or long-range persistence.(ie Although an asset return series has no serial correlation,the ACF of the squared or absolute-valued series of the return always decays at a hyperbolic rate as the lag increases.)We can see the BET stock index  \footnote[1]{The data and Rcode of this paper is downloadable from Yilun's github： \url{https://github.com/lunge111/STA237PROJECT}, for usage of functions see readme.md} as an example. The following plot is the sample ACF of daily returns(BUCH), sqared returns(SQBUCH) log sqared returns(log SQBUCH) and log absolute returns (log ABSBUCH) for BET stock index from November 12,1999 to June 2,2014(Figure 1).
+We know that capital markets always show characters of non-linearity, and long-term memory is the most important feature of non-linear systems. In fact, many economists believe that asset market is a non-linear system with many uncertainties. Many researches have shown that the conditional volatility of asset prices show long memory or long-range persistence.(ie Although an asset return series has no serial correlation,the ACF of the squared or absolute-valued series of the return always decays at a hyperbolic rate as the lag increases.) We can see the BET stock index  \footnote[1]{The data and Rcode of this paper is downloadable from Yilun's github: \url{https://github.com/lunge111/STA237PROJECT}, for usage of functions see README.md} as an example. The following plot is the sample ACF of daily returns(BUCH), sqared returns(SQBUCH) log sqared returns(log SQBUCH) and log absolute returns (log ABSBUCH) for BET stock index from November 12,1999 to June 2,2014(Figure 1).
 
 \begin{figure}[!htbp]
 \centering
@@ -43,9 +43,10 @@ We know that capital markets always show characters of non-linearity,and long-te
 
 
 
-Here we need to mention that BET is the reference index for the BVB,Bucharest Stock Exchange market.In BVB  there are traded shares,rights, bonds fund units and etc. BET is a free float weighted capitalization index of the most liquid 10 companies listed on the BVB regulated market.Thus this index methodology allows BET to be a powerful indication of the BVB market.Here we can clearly see the patterns we have mentioned before, the log squared or log absolute returns are decaying at a hyperbolic rate as the lag increases.
+Here we need to mention that BET is the reference index for the BVB, Bucharest Stock Exchange market. In BVB  there are traded shares, rights, bonds fund units and etc. BET is a free float weighted capitalization index of the most liquid 10 companies listed on the BVB regulated market. Thus this index methodology allows BET to be a powerful indication of the BVB market. Here we can clearly see the patterns we have mentioned before, the log squared or log absolute returns are decaying at a hyperbolic rate as the lag increases.
 
- In fact,traditional analyzing methods mainly focus on the short-term analysis,thus they cannot appropriately discribe the cases in the asset market, especially  the stochastic volatility  of asset prices.For a short memory process, its ACF or $\rho(h)$ willbe bounded at geometric rate, meaning that $|\rho(h)|\leq C r^{|h|}$ for some $C>0,\  0<r<1 $On the contrary,for a long memory process, its ACF decays as a hyperbolic rate, meaning that $\rho(h)\sim Ch^{2d-1}$ when $h$ increases to infinity.where $C\neq 0$ and $d<0.5$ In particular,when we focus on the long memory process with $0<d<0.5$,then we have $\sum |\rho(h)|=\infty$ we call this property persistent .
+ In fact,traditional analyzing methods mainly focus on the short-term analysis,thus they cannot appropriately discribe the cases in the asset market, especially  the stochastic volatility  of asset prices.For a short memory process, its ACF or $\rho(h)$ will be bounded at geometric rate, meaning that $|\rho(h)|\leq C r^{|h|}$ for some $C>0,\  0<r<1 $On the contrary,for a long memory process, its ACF decays as a hyperbolic rate, meaning that $\rho(h)\sim Ch^{2d-1}$ when $h$ increases to infinity. where $C\neq 0$ and $d<0.5$ In particular, when we focus on the long memory process with $0<d<0.5$,then we have $\sum |\rho(h)|=\infty$ we call this property persistent .
+ 
 In order to test and estimate the persistent process, the paper we read gives a new method called long memory stochastic volatility(LMSV) model to represent the persistence in conditional variance and the authors have shown the superiority of the model when compared with many well known short-memory volatility models such as ARCH,GARCH,EGARCH and etc.
 
 
@@ -103,15 +104,15 @@ From above, we now can see that both GARCH model and EGARCH model can be express
   
   To introduce the next considered models, first, we introduce the long-memory process and ARFIMA model.\\
   
-  For a discrete time series process $v_t$ with autocorrelation function $\rho (h)$ at lag h, the process is long-memory if the quantity
+  For a discrete time series process $v_t$ with autocorrelation function $\rho (h)$ at lag h, the process is persistent if the quantity
 $$\lim\limits_{n\rightarrow\infty} \sum_{h=-n}^{n}|\rho(h)|$$
 is nonfinite.Consequently,the spectral density $f(\omega)$ could be unbounded at low frequencies. However, a stationary and invertible ARMA process will always have a geometrically bounded autocorrelations and is a short memory process. Fractionally integrated process is a long memory process. For a simple case, consider the following,
 $$(1-B)^dv_t=\eta_t$$
-where B is the lag operator. When $-0.5<d<0.5$,and $\eta_t$ is a stationary process with a bounded valued spectrum at all frequencies. When $d=0$,the process is covariance stationary. When $0<d<0.5$,the process is long-memory and its autocorelations decay at a hyperbolic rate. When $-0.5<d<0$, the sum of absolute values of the autocorrelations tends to a constant.Thus, it is short memory.\\
+where B is the lag operator. When $-0.5<d<0.5$,and $\eta_t$ is a stationary process with a bounded valued spectrum at all frequencies. When $d=0$,the process is covariance stationary. When $0<d<0.5$,the process is persistent and its autocorelations decay at a hyperbolic rate. When $-0.5<d<0$, the sum of absolute values of the autocorrelations tends to a constant.\\
 
  More generally, we can define an ARFIMA process,ARFIMA(p,d,q) model, as follows,
 $$\phi(B)(1-B)^d(y_t-\mu)=\theta(B)\epsilon_t$$
-where d is the fractional differencing parameter and $\epsilon_t$ is white noise. For $0<d<0.5$,the autocorrelation function,$\rho(.)$,is proportional to $k^{2d-1}$ as $k\rightarrow\infty$. Then, the autocorrelation of the ARFIMA process decay hyperbolically to zero as $k\rightarrow\infty$ which is different from geometric decay of a stationary ARMA process. Also for $0<d<0.5$, $\sum_{h=-n}^{h=n} |\rho(h)|$ diverges as $n\rightarrow \infty$,the process exhibits long memory. For $-0.5<d<0$, the process is said to exhibit intermeidiate memory.  \\
+where d is the fractional differencing parameter and $\epsilon_t$ is white noise. For $0<d<0.5$,the autocorrelation function,$\rho(.)$,is proportional to $k^{2d-1}$ as $k\rightarrow\infty$. Then, the autocorrelation of the ARFIMA process decay hyperbolically to zero as $k\rightarrow\infty$ which is different from geometric decay of a stationary ARMA process. Also for $0<d<0.5$, $\sum_{h=-n}^{h=n} |\rho(h)|$ diverges as $n\rightarrow \infty$,the process exhibits long memory. For $-0.5<d<0$, the process is said to exhibit intermeidiate memory. \cite{shumway2000time} \\
 
 3. Long-memory GARCH and EGARCH model.\\
 
@@ -126,7 +127,7 @@ Thus the fractionally integrated GARCH (FIGARCH) model is the following,
 which means
 $$\sigma^2=\mu+(1-B)^{-d}a(B)b^{-1}(B){y_t}^2=\mu+\sum_{j=1}^{n}\phi_j(y_{t-1-j}^2-\mu)$$
 And avoiding the possibility of $\sigma_t^2<0$ leads to the situation where the use of spectral and time-domain autocorrelation methods is not justifiable in the standard way. Furthermore, problems occur when estimating the parameters.\\
-Similar midifications can be applied to EGARCH models, we can obtain fractionally integrated EGARCH models. However, it is difficult to obtain good estimators in this model since asymtotic situation makes it hard to estimate the parameters.
+Similar midifications can be applied to EGARCH models, we can obtain fractionally integrated EGARCH models. However, it is difficult to obtain good estimators in this model since asymtotic situation makes it hard to estimate the parameters.\cite{shumway2000time}
 
 \section{Long memory stochastic volatility (LMSV) model}
 As we can see from above, both long-memory GARCH and EGARCH models are not appropriate in this case. Thus, the author consider the following long-memory stochastic volatility model. \\
@@ -148,7 +149,7 @@ In this part, we want to test whether a process is short
  memory or long memory, ie, the $d$ in the model predefined is 0 or not. The paper provide two ways of test.
 \subsection{Regression on frequency domain}
 
-Let$u_t=(1-B)^dx_t$, $f_\beta(\lambda)^{(x)}$ is the spectral density of $x_t$ based on parameter $\bm{\beta} $, $f_\beta(\lambda)^{(u)}$ is the spectral density of $u_t$
+Let$u_t=(1-B)^dv_t$, $f_\beta(\lambda)^{(x)}$ is the spectral density of $x_t$ based on parameter $\bm{\beta} $, $f_\beta(\lambda)^{(u)}$ is the spectral density of $u_t$. $v_t$ is an ARFIMA(p,d,q) process and $u_t$ is an ARMA(p,q) process.
 $$f_\beta(\lambda)^{(x)}=\frac{\sigma_\eta^2|\theta(e^{-i\lambda})|^2}{2\pi|1-e^{-i\lambda}|^{2d}|\phi(e^{-i\lambda})|^2}+\frac{\sigma^2_\epsilon}{2\pi}=|1-e^{-i\lambda}|^{-2d}f_\beta(\lambda)^{(u)}+\frac{\sigma^2_\epsilon}{2\pi}$$
 Taking logarithms in both sides 
 \[
@@ -236,13 +237,13 @@ The results are shown in Table 1. Some conclusions drawn from Table 1 are as fol
 \begin{itemize}
 \item {As the paper states, short memory and long memory are distinguishable.}
 \item {To have small type I and type II error, it seems that $u=0.45$  and $q=q^*$, where $q^*$ is data dependent formula, are preferred.}
-\item {Lo(1991)\cite{lo1989long} states using the classic Hurst exponent may be significantly biased and will converge to  $cV$, where c is a constant. $$c^2=\lim_{n\to\infty}E(\frac{1}{n}(\sum_{i=1}^{n}x_t)^2)/(\lim_{n\to\infty}E(\frac{1}{n}\sum_{i=1}^{n}x_t^2))$$therefore, a test based on $\hat{J}(n,0)$ is doable when the two limits above can be calculate analytically and finite. In our case, although the second moment and variance of ARFIMA part is finite, but this two limits can't be calculate without known the distribution of the noise tern $\eta$.}
-\item{In R/S test with q=200, it intends to accept the null hypothesis.}
+\item {Lo(1991)\cite{lo1989long} states using the classic Hurst exponent may be significantly biased and will converge to  $cV$, where c is a constant. $$c^2=\lim_{n\to\infty}E(\frac{1}{n}(\sum_{i=1}^{n}x_t)^2)/(\lim_{n\to\infty}E(\frac{1}{n}\sum_{i=1}^{n}x_t^2))$$therefore, a test based on $\hat{J}(n,0)$ is doable when the two limits above can be calculate analytically and finite. In our case, although the second moment and variance of ARFIMA part is finite, but this two limits can't be calculate without known the distribution of the noise term $\eta$.}
+\item{In R/S test with q=200, it intends to accept the null hypothesis, even it is long memory.}
 \end{itemize}
 
 To conclusion, Both spectral regression test perform well to test long memory. Even in the strong correlated short memory case(the AR parameter close to 1 ), short memery and long memory are distinguishable.
 
-We use these tests on Bucharest data set. 
+We use these tests on Bucharest data set(Table 2). 
 
 \begin{table}[!hbp]
 \begin{tabular}{llllllll}
@@ -291,13 +292,13 @@ Further, Hosoya (1997)\cite{hosoya1997limit} proves $\sqrt{n}$-consistency and a
 Where $J_x(\beta)$ is Fisher information.
 
 \subsection{Simulation Study and Empirical evidence}
-The paper doesn't metion what algorithm use to seach minimizer of negative log likelihood. We firstly use optim() function in R with default method Nelder–Mead. We found it is fast and easily implement when $\sigma_\epsilon^2$ and $sigma_\eta^2$ are known. When they are unknown, which is of most practical case, it will be unstable, sensitive to start points. Once start points are not properly set, some weird result like $\hat{\phi}=23$ will occur. We use the result of spectral regression to be the start point of $d$. We also figure out a MCMC method to search for minimizer. That is: 
+The paper doesn't metion what algorithm use to seach minimizer of negative log likelihood. We firstly use optim() function in R with default method Nelder-Mead. We found it is fast and easily implement when $\sigma_\epsilon^2$ and $\sigma_\eta^2$ are known. When they are unknown, which is of most practical case, it will be unstable(i.e. log absolute returns BUCH data), a bit sensitive to start points. Once start points are not properly set, some weird result like $\hat{\phi}=23$ will occur. We use the result of spectral regression to be the start point of $d$. We also figure out a MCMC method to search for minimizer. That is: 
 \begin{itemize}
 \item{set a start point of $\sigma_\epsilon^2(0)$ and $\sigma_\eta^2(0)$}
-\item{ use settled point $\sigma_\epsilon^2(0)$ and $sigma_\eta^2(0)$, estimate the rest coefficient $\hat{\beta}(0)|\sigma_\epsilon^2(0),\sigma_\eta^2(0)$\\=$\{d,\bm{\phi},\bm{theta}\}|\sigma_\epsilon^2(0)$,$\sigma_\eta^2(0)$}
+\item{ use settled point $\sigma_\epsilon^2(0)$ and $\sigma_\eta^2(0)$, estimate the rest coefficient $\hat{\beta}(0)|\sigma_\epsilon^2(0),\sigma_\eta^2(0)$\\=$\{d,\bm{\phi},\bm{theta}\}|\sigma_\epsilon^2(0)$,$\sigma_\eta^2(0)$}
 \item{with $\hat{\beta}(0)$ randomly search for $\sigma_\epsilon^2(1)$ and $\sigma_\eta^2(1)$ decrease the negative log likelihood}
 \item{use the new found $\sigma_\epsilon^2(1)$ and $\sigma_\eta^2(1)$ estimate the rest coefficients.}
-\item{repeat the above steps when it reaches prespecified maximum iteration bound or the mle converges.}
+\item{repeat the above steps until it reaches prespecified maximum iteration bound or the mle converges.}
 \end{itemize}
 
 This method is computational expensive, it takes almost 1 hour when n=9316. But it is insensitive to startpoint and always gives reasonable result. However, as other Monte Carlo method, there is randomness in the search process.
@@ -363,13 +364,13 @@ Some conclusions from Table 3 and Boxplots:
 \begin{itemize}
 \item {no significant bias observed }
 \item {the standard deviation decreases when the sample size becomes large}
-\item {the performance of spectral maximum likelihood is not so good since relatively large standard deviation and existence of outliers }
+\item {the performance of spectral maximum likelihood of small sample is not so good since relatively large standard deviation and existence of outliers }
 \item {the AR coefficient are hard to estimate using Nelder–Mead method in two ways: 1. it mostly gives unreasonable result even we set start points to be the true value. 2. when MA coefficients are estimated, the computational time becomes surperingly expensive, this is why we didn't conduct simulations for $q>0$ in ARFIMA(p,d,q)}
 \end{itemize}
 
-We estimate coefficient of log sqared BUCH data, Nelder–Mead method yields $\sigma_\eta^2=0.780,\, \sigma_\epsilon^2=4.403,\,\phi= 0.137,\,d=0.417$, MCMC method yields $ \sigma_\eta^2=0.537,\, \sigma_\epsilon^2=5.00,\,\phi= 0.135,\,d=0.434 $ 
+We estimate coefficient of log sqared BUCH data, Nelder–Mead method yields $\sigma_\eta^2=0.780,\, \sigma_\epsilon^2=4.403,\,\phi= 0.137,\,d=0.417$, MCMC method yields $ \sigma_\eta^2=0.537,\, \sigma_\epsilon^2=5.00,\,\phi= 0.135,\,d=0.434 $ (seems reaches max iteration before convergence of mle)
 
-In Figure 4, we use the estimated coefficients to run simulation for 100 replications and plot the mean acf with the acf of data. We can see the LMSV model with estimated data fits well, it clearly shows the hyperbolical decay of acf.
+In Figure 4, we use the estimated coefficients(Nelder-Mead) to run simulation for 100 replications and plot the mean acf with the acf of data. We can see the LMSV model with estimated data fits well, it clearly shows the hyperbolical decay of acf.
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=14.5cm]{Rplot3}

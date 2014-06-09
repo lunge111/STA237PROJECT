@@ -27,6 +27,14 @@ Bucharest2=Bucharest #return
 Bucharest3=log(abs(Bucharest)) #log absolute return 
 Bucharest=log(Bucharest ^2) #log squared return
 
+arfima.est.mc(Bucharest)
+
+par(mfrow=c(2,2))
+
+acf(Bucharest2,lag.max=200,ylim=c(0,0.3),main="acf of BUCH ")
+acf(Bucharest1,lag.max=200,ylim=c(0,0.3),main="acf of SQBUCH")
+acf(Bucharest,lag.max=200,ylim=c(0,0.3),main="acf of log SQBUCH ")
+acf(Bucharest3,lag.max=200,ylim=c(0,0.3),main="acf of log ABSBUCH")
 
 options(digits=3)
 reg_sim(model="ARSV",ph=0.95,sig2=0.07)

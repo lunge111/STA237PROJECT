@@ -179,7 +179,7 @@ arfima.est.sig<-function(dat,order=c(1,0),FFT=TRUE,startpoint=NULL){
 
 
 
-arfima.est.mc<-function(dat,order=c(1,0),max.iter=2000,start=c(0.5,5)){
+arfima.est.mc<-function(dat,order=c(1,0),max.iter=1000,start=c(0.5,5)){
   sig1=start[1]
   sig2=start[2]
   sig1.new=sig1+abs(rnorm(1,sd=0.5))
@@ -187,13 +187,13 @@ arfima.est.mc<-function(dat,order=c(1,0),max.iter=2000,start=c(0.5,5)){
   est=arfima.est(dat,sig1=sig1.new,sig2=sig2.new)
 mle=est$mle
 par=est$par
-mle.old=mle-100
+mle.old=mle+100
 i=0
   while(abs(mle.old-mle)>0.001&i<max.iter){
     
 sig1.new=sig1+0.1*abs(runif(1)-0.5)
 sig2.new=sig2+abs(runif(1)-0.5)
-if(mle>mle.old){
+if(mle<mle.old){
   sig1=sig1.new
   sig2=sig2.new
   mle.old=mle
@@ -201,6 +201,7 @@ if(mle>mle.old){
 }
 est=arfima.est(dat,startpoint=par,sig1=sig1.new,sig2=sig2.new)
 mle=est$mle
+
 i=i+1
   }
 c(sig1sq=sig1,sig2sq=sig2,par)
