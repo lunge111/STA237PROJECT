@@ -10,7 +10,6 @@
 \usepackage{authblk}
 \usepackage{listings}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage[colorlinks,linkcolor=blue]{hyperref}
 \textwidth 6.5in
 \textheight 8in
@@ -34,22 +33,23 @@
 
 \section{Background introduction}
 
-We know that capital markets always show characters of non-linearity,and long-term memory is the most important feature of non-linear systems.In fact, many economists believe that asset market is a non-linear system with many uncertainties. Many researches have shown that the conditional volatility of asset prices show long memory or long-range persistence.(ie Although an asset return series has no serial correlation,the ACF of the squared or absolute-valued series of the return always decays at a hyperbolic rate as the lag increases.)We can see the BET stock index as an example. The following plot is the sample ACF of daily returns for BET stock index from November 12,1999 to June 2,2014.
+We know that capital markets always show characters of non-linearity,and long-term memory is the most important feature of non-linear systems.In fact, many economists believe that asset market is a non-linear system with many uncertainties. Many researches have shown that the conditional volatility of asset prices show long memory or long-range persistence.(ie Although an asset return series has no serial correlation,the ACF of the squared or absolute-valued series of the return always decays at a hyperbolic rate as the lag increases.)We can see the BET stock index  \footnote[1]{The data and Rcode of this paper is downloadable from Yilun's github： \url{https://github.com/lunge111/STA237PROJECT}} as an example. The following plot is the sample ACF of daily returns for BET stock index from November 12,1999 to June 2,2014(Figure 1).
 
-\begin{figure}
+\begin{figure}[!htb]
 \centering
 \includegraphics[scale = 0.65]{return.png}
 \caption{}
 \end{figure}
 
-Then we can compare it with the sample ACF of squared returns and log squared returns as the following two plots.
+Then we can compare it with the sample ACF of squared returns(Figure 2) and log squared returns as the following two plots(Figure 3).
 
-\begin{figure}
+\begin{figure}[!htb]
 \centering
 \includegraphics[scale = 0.65]{squaredreturn.png}
 \caption{}
 \end{figure}
-\begin{figure}
+
+\begin{figure}[!htb]
 \centering
 \includegraphics[scale = 0.65]{logsquared.png}
 \caption{}
@@ -57,9 +57,9 @@ Then we can compare it with the sample ACF of squared returns and log squared re
 
 
 
-In addition, we can also plot the log absolute returns for the same data to compare the patterns as the following.
+In addition, we can also plot the log absolute returns for the same data to compare the patterns as the following(Figure 4).
 
-\begin{figure}
+\begin{figure}[!htb]
 \centering
 \includegraphics[scale = 0.65]{logabsreturn.png}
 \caption{}
@@ -122,7 +122,6 @@ where $\phi(z)$\ and \ $\theta(z)$ are the autoregressive polynomial  and moving
 From above, we now can see that both GARCH model and EGARCH model can be expressed in ARMA form,they are considered from the short-memory point of view,not the long memory model,thus the authors considered the following model.
 
 
-Definition of long-memory process and ARFIMA model\\
   
   To introduce the next considered models, first, we introduce the long-memory process and ARFIMA model.\\
   
@@ -149,21 +148,20 @@ Thus the fractionally integrated GARCH (FIGARCH) model is the following,
 which means
 $$\sigma^2=\mu+(1-B)^{-d}a(B)b^{-1}(B){y_t}^2=\mu+\sum_{j=1}^{n}\phi_j(y_{t-1-j}^2-\mu)$$
 And avoiding the possibility of $\sigma_t^2<0$ leads to the situation where the use of spectral and time-domain autocorrelation methods is not justifiable in the standard way. Furthermore, problems occur when estimating the parameters.\\
-Similar midifications can be applied to EGARCH models, we can obtain fractionally integrated EGARCH models. However, it is difficult to obtain good estimators in this model since asymtotic situation makes it hard to estimate the parameters.\\
+Similar midifications can be applied to EGARCH models, we can obtain fractionally integrated EGARCH models. However, it is difficult to obtain good estimators in this model since asymtotic situation makes it hard to estimate the parameters.
 
-4.Long memory stochastic volatility (LMSV) model.\\
-
+\section{Long memory stochastic volatility (LMSV) model}
 As we can see from above, both long-memory GARCH and EGARCH models are not appropriate in this case. Thus, the author consider the following long-memory stochastic volatility model. \\
 First, we introduce the stochastic volatility model. 
 In order to increase flexiblity of describing the evolution of $\sigma^2$,an alternative way is to add an innovation $v_t$ to the conditional variance equation of $y_t$.This is called a stochastic volatility.The model is defined by
 $$y_t=\sigma_t\epsilon_t, \qquad \sigma_t=\sigma exp(v_t/2)$$
 where {$\{v_t\}$} is independent of {$\{\epsilon_t\}$},{$\{\epsilon_t\}$} is independent and identically distributed with mean zero and variance one.
-In our case, we need to fit a long memory data, thus, it is resonable to modify the model to long memory version by incorporating an ARFIMA process in a standard stochastic volatility model.Generally speaking,$\{v_t\}$ can be modeled as an ARFIMA(p,d,q), defined as follows,
+In our case, we need to fit a long memory data, thus, it is resonable to modify the model to long memory version by incorporating an ARFIMA process in a standard stochastic volatility model.Generally speaking,$\{v_t\}$ can be modeled as an ARFIMA(p,d,q),\cite{baillie1996long} defined as follows,
 $$(1-B)^d\phi(B)v_t=\theta(B)\eta_t$$
 where $\{\eta_t\} i.i.d N(0,\sigma_\eta^2)$ \\\\
 The series can be analyzed as the following,
 \begin{center}$\displaystyle log(y^2_t)=log(\sigma^2)+v_t+log(\epsilon^2_t)=\{log(\sigma^2)+E(log\epsilon^2_t)\}+v_t+\{log(\epsilon^2_t)-E(log(\epsilon^2_t))\}$\end{center}
-\begin{center} $\displaystyle log(y^2_t)=\mu+v_t+e_t$\end{center}
+\begin{center} $\displaystyle x_t=\mu+v_t+e_t$\end{center}
 This is a long-memory Gaussian signal plus an i.i.d,non- Gaussian noise.This transformed series is easy to analyze.
 
 Next,we will show the performance of long-memory test and emperical evidence. And it shows the superiority of model.
@@ -292,12 +290,12 @@ RESULT& 0.0261  & 0.00231  & 0.000124  & \,  &   long memory &  short memory\\
 }
 
 \end{table}
-Except the daily return of BUCH, other three shows strong long memory feature, as we see in Figure 1.
+Except the daily return of BUCH, other three shows strong long memory feature, as we see in Figure 1, the same conclusion should be drawn from Figure 1-4.
  
 \section{Estimating coefficients}
 In this section, we want to estimate the coefficients $\bm{\beta}=\{\sigma_\epsilon^2,\sigma_\eta^2,\bm{\phi,\bm{\theta}}\}$
 
-In section 5.1, we discussed use spectral regression to estimate d. However, we can see in the simulation study, d is underestimated with bias can't be neglected.
+In section 4.1, we discussed use spectral regression to estimate d. However, we can see in the simulation study, d is underestimated with bias can't be neglected.
 
 MLE method on time domain is also problematic. In the Gaussian likelihood for ARFIMA model:\[
 L(\bm{\beta},\sigma)=(2\pi\sigma^2)^{-n/2}(r_0,\cdots,r_{n-1})exp(-\frac{1}{2\sigma^2}\sum_{j=1}^{n}(X_j-\hat{X}_j^2/r_{j-1}))
@@ -414,7 +412,7 @@ Mikosch and Starica (2004)\cite{mikosch2004nonstationarities}, Perron and Qu (20
 \renewcommand\refname{Reference}
 \bibliographystyle{plain}
 \bibliography{writeup} 
-We also refers some unpublished instruction or slides. see(\url{URL})
+We also refers some unpublished instruction or slides. see(\url{https://github.com/lunge111/STA237PROJECT})
 \end{document}
 
 
