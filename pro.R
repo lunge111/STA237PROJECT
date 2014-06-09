@@ -179,7 +179,7 @@ arfima.est.sig<-function(dat,order=c(1,0),FFT=TRUE,startpoint=NULL){
 
 
 
-arfima.est.mc<-function(dat,order=c(1,0),max.iter=100,start=c(0.5,5)){
+arfima.est.mc<-function(dat,order=c(1,0),max.iter=2000,start=c(0.5,5)){
   sig1=start[1]
   sig2=start[2]
   sig1.new=sig1+abs(rnorm(1,sd=0.5))
@@ -209,59 +209,6 @@ c(sig1sq=sig1,sig2sq=sig2,par)
 
 
 
-#test_______________________________________________
-
-data <- arfima.sim(10000, model = list(phi =0.81, dfrac = -0.47, theta = 0),
-                   sigma2=0.1)
-
-
-
-rho1=acf(data,plot=F)$acf[2]
-q=floor((1.5*length(data))^(1/3)*(2*rho1/(1-rho1^2))^(2/3))
-
-
-
-RS_test(data,q=200)
-RS_test(data,data_dep=T)
-RS_test(data,q=0)
-
-acf(data)$acf
-
-SpecRegre(data,0.5)
-re1=reg_sim(model="LMSV",ph=0,d=0.49,sig2=0.05)
-re1
-re2=reg_sim(model="LMSV",ph=0,d=0.47,sig2=0.11)
-re2
-setwd("D:/14sp237/project")
-Bucharest  <- read.csv("INDICES.csv",head=T)[,2]
-Bucharest =diff(log(Bucharest ))
-Bucharest1=Bucharest^2 #squared return
-Bucharest2=Bucharest #return
-Bucharest3=log(abs(Bucharest)) #log absolute return 
-Bucharest=log(Bucharest ^2) #log squared return
-
-
-options(digits=3)
-reg_sim(model="ARSV",ph=0.95,sig2=0.07)
-reg_sim(model="LMSV",ph=0.93,d=0.44,sig2=0.003)
-save(Bucharest,file="Bucharest.rda")
-acf(Bucharest,lag.max=200,ylim=c(0,0.3),main="acf of log SQBUCH with estimated model acf")
-lines(acf)
-
-SpecRegre(Bucharest3,0.45)
-SpecRegre(Bucharest3,0.5)
-SpecRegre(Bucharest3,0.55)
-RS_test(Bucharest3,q=0)
-RS_test(Bucharest3,data_dep=T)
-RS_test(Bucharest3,q=200)
-#--------------------------------------------------------
-
-#estimate____________________________________
-
-data <- arfima.sim(4000, model = list(phi = 0.3, dfrac =0.2, theta = 0),
-                   sigma2=1)+log(rchisq(4000,1))
-
-system.time(arfima.est(data))
 
 
 
