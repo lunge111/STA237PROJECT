@@ -16,7 +16,7 @@
 \topmargin 0pt
 \linespread{1.5}
 \oddsidemargin 0pt
-\title{\huge STA237 Proje}
+\title{\huge STA237 Project}
 \newtheorem{coro}{\hskip 2em Corollary}[section]
 \newtheorem{remark}[coro]{\hskip 2em Remark}
 \newtheorem{propo}[coro]{\hskip 2em  Proposition}
@@ -33,37 +33,15 @@
 
 \section{Background introduction}
 
-We know that capital markets always show characters of non-linearity,and long-term memory is the most important feature of non-linear systems.In fact, many economists believe that asset market is a non-linear system with many uncertainties. Many researches have shown that the conditional volatility of asset prices show long memory or long-range persistence.(ie Although an asset return series has no serial correlation,the ACF of the squared or absolute-valued series of the return always decays at a hyperbolic rate as the lag increases.)We can see the BET stock index  \footnote[1]{The data and Rcode of this paper is downloadable from Yilun's github： \url{https://github.com/lunge111/STA237PROJECT}, for usage of functions see readme.md} as an example. The following plot is the sample ACF of daily returns for BET stock index from November 12,1999 to June 2,2014(Figure 1).
+We know that capital markets always show characters of non-linearity,and long-term memory is the most important feature of non-linear systems.In fact, many economists believe that asset market is a non-linear system with many uncertainties. Many researches have shown that the conditional volatility of asset prices show long memory or long-range persistence.(ie Although an asset return series has no serial correlation,the ACF of the squared or absolute-valued series of the return always decays at a hyperbolic rate as the lag increases.)We can see the BET stock index  \footnote[1]{The data and Rcode of this paper is downloadable from Yilun's github： \url{https://github.com/lunge111/STA237PROJECT}, for usage of functions see readme.md} as an example. The following plot is the sample ACF of daily returns(BUCH), sqared returns(SQBUCH) log sqared returns(log SQBUCH) and log absolute returns (log ABSBUCH) for BET stock index from November 12,1999 to June 2,2014(Figure 1).
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[scale = 0.65]{return.png}
-\caption{}
-\end{figure}
-
-Then we can compare it with the sample ACF of squared returns(Figure 2) and log squared returns as the following two plots(Figure 3).
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[scale = 0.65]{squaredreturn.png}
-\caption{}
-\end{figure}
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[scale = 0.65]{logsquared.png}
+\includegraphics[width = 16.5cm, height=20cm]{Rplot.png}
 \caption{}
 \end{figure}
 
 
-
-In addition, we can also plot the log absolute returns for the same data to compare the patterns as the following(Figure 4).
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[scale = 0.65]{logabsreturn.png}
-\caption{}
-\end{figure}
 
 Here we need to mention that BET is the reference index for the BVB,Bucharest Stock Exchange market.In BVB  there are traded shares,rights, bonds fund units and etc. BET is a free float weighted capitalization index of the most liquid 10 companies listed on the BVB regulated market.Thus this index methodology allows BET to be a powerful indication of the BVB market.Here we can clearly see the patterns we have mentioned before, the log squared or log absolute returns are decaying at a hyperbolic rate as the lag increases.
 
@@ -290,7 +268,7 @@ RESULT& 0.0261  & 0.00231  & 0.000124  & \,  &   long memory &  short memory\\
 }
 
 \end{table}
-Except the daily return of BUCH, other three shows strong long memory feature, as we see in Figure 1, the same conclusion should be drawn from Figure 1-4.
+Except the daily return of BUCH, other three shows strong long memory feature, as we see in Figure 1, the same conclusion should be drawn from Figure 1.
  
 \section{Estimating coefficients}
 In this section, we want to estimate the coefficients $\bm{\beta}=\{\sigma_\epsilon^2,\sigma_\eta^2,\bm{\phi,\bm{\theta}}\}$
@@ -391,7 +369,7 @@ Some conclusions from Table 3 and Boxplots:
 
 We estimate coefficient of log sqared BUCH data, Nelder–Mead method yields $\sigma_\eta^2=0.780,\, \sigma_\epsilon^2=4.403,\,\phi= 0.137,\,d=0.417$, MCMC method yields $ \sigma_\eta^2=0.537,\, \sigma_\epsilon^2=5.00,\,\phi= 0.135,\,d=0.434 $ 
 
-In Figure 7, we use the estimated coefficients to run simulation for 100 replications and plot the mean acf with the acf of data. We can see the LMSV model with estimated data fits well, it clearly shows the hyperbolical decay of acf.
+In Figure 4, we use the estimated coefficients to run simulation for 100 replications and plot the mean acf with the acf of data. We can see the LMSV model with estimated data fits well, it clearly shows the hyperbolical decay of acf.
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=14.5cm]{Rplot3}
